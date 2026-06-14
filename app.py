@@ -1,11 +1,4 @@
-"""
-Plant Disease Detector — Streamlit frontend.
 
-Upload a leaf photo and the MobileNetV2 model (checkpoint_epoch4.pth) predicts
-the disease, its confidence, the top-3 alternatives and treatment advice.
-
-Run:  streamlit run app.py
-"""
 import io
 import os
 
@@ -28,9 +21,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# --------------------------------------------------------------------------
-# Styling — green "Green Guide Gallery" theme
-# --------------------------------------------------------------------------
 st.markdown(
     """
     <style>
@@ -83,18 +73,12 @@ preprocess = transforms.Compose([
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
 ])
 
-
 def predict(image: Image.Image, model, class_names, device, k=3):
     tensor = preprocess(image.convert("RGB")).unsqueeze(0).to(device)
     with torch.no_grad():
         probs = F.softmax(model(tensor), dim=1)[0].cpu()
     top = torch.topk(probs, k)
     return [(class_names[i], float(probs[i])) for i in top.indices], probs
-
-
-# --------------------------------------------------------------------------
-# Sidebar
-# --------------------------------------------------------------------------
 with st.sidebar:
     st.markdown("### 🌱 About")
     st.write(
@@ -111,9 +95,6 @@ with st.sidebar:
     st.caption("Model: MobileNetV2 · ~2.24M params · 15 disease classes\n\n"
                "Computer Vision Semester Project")
 
-# --------------------------------------------------------------------------
-# Hero
-# --------------------------------------------------------------------------
 st.markdown(
     """
     <div class="hero">

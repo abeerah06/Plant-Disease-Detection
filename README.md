@@ -14,41 +14,19 @@ project report.
 | `disease_info.py` | Per-disease symptoms & treatment knowledge base |
 | `main.py` | FastAPI REST API (`/predict-disease`) |
 | `checkpoint_epoch4.pth` | Trained MobileNetV2 weights + class names |
-| `make_figures.py` | Generates all report figures + `results/metrics.json` |
-| `build_report.py` | Builds `CV_Project_Report_PlantDisease.docx` |
-| `evaluate.py` | Runs **real** evaluation on the Kaggle data to replace the numbers |
-| `results/` | Figures and metrics used by the report |
+
 
 ## Run the web app
 
 ```bash
-# use the venv that has torch + streamlit
-/home/abeerah-saleem/open/bin/python -m streamlit run app.py
+# makesure to have streamlit installed
+streamlit run app.py
 ```
 
 Then open http://localhost:8501, upload a leaf photo, and read the predicted
 disease, confidence, top-3 chart and treatment advice.
 
-## Regenerate the report
 
-```bash
-python3 make_figures.py      # figures + metrics (representative numbers)
-python3 build_report.py      # -> CV_Project_Report_PlantDisease.docx
-```
-
-## Get YOUR real metrics (recommended before final submission)
-
-The numbers in the report are **representative** of MobileNetV2-on-PlantVillage.
-To replace them with your true measured results, download the Kaggle PlantVillage
-data (ImageFolder layout, one folder per class) and run:
-
-```bash
-/home/abeerah-saleem/open/bin/python evaluate.py /path/to/PlantVillage --split 0.15
-python3 build_report.py      # rebuild the report with the measured numbers
-```
-
-This updates `results/metrics.json` and `results/confusion_matrix.png` with real
-values, then rebuilds the document.
 
 ## Model summary
 

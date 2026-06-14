@@ -1,13 +1,4 @@
-"""
-Knowledge base for the 16 raw output classes of the MobileNetV2 model
-(15 real PlantVillage classes + 1 spurious "split" folder artifact).
 
-Each entry provides a clean display name, the host plant, whether the leaf is
-healthy, a short description of symptoms, and practical treatment / management
-advice. Used by the Streamlit app (app.py) and the report generator.
-"""
-
-# Maps the raw checkpoint class string -> human-friendly metadata.
 DISEASE_INFO = {
     "Pepper__bell___Bacterial_spot": {
         "plant": "Bell Pepper",
@@ -145,10 +136,7 @@ DISEASE_INFO = {
         "treatment": "No action required. Maintain consistent watering and "
                      "monitor regularly for early signs of disease.",
     },
-    # --- Data artifact ----------------------------------------------------
-    # A spurious 'split' folder was picked up as a 16th class during dataset
-    # preparation. It is not a real plant condition. The UI flags it so the
-    # finding is transparent rather than hidden.
+    
     "split": {
         "plant": "—",
         "name": "Unknown / Non-leaf (data artifact)",
